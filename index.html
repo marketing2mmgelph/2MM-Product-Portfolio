@@ -39,17 +39,17 @@
 
   <!-- MOBILE DRAWER -->
   <div class="nav-drawer" id="navDrawer">
-    <a class="nav-drawer-link" href="#brand" onclick="closeDrawer()">Brand Overview <span>A</span></a>
-    <a class="nav-drawer-link" href="#product" onclick="closeDrawer()">Product Info <span>B</span></a>
-    <a class="nav-drawer-link" href="#compliance" onclick="closeDrawer()">Compliance <span>C</span></a>
-    <a class="nav-drawer-link" href="#pricing" onclick="closeDrawer()">Pricing <span>D</span></a>
-    <a class="nav-drawer-link" href="#assets" onclick="closeDrawer()">Marketing Assets <span>E</span></a>
-    <a class="nav-drawer-link" href="#guidelines" onclick="closeDrawer()">Content Guidelines <span>F</span></a>
-    <a class="nav-drawer-link" href="#logistics" onclick="closeDrawer()">Logistics <span>G</span></a>
-    <a class="nav-drawer-link" href="#partnership" onclick="closeDrawer()">Partnership Terms <span>H</span></a>
-    <a class="nav-drawer-link" href="#opportunity" onclick="closeDrawer()">Business Opportunity <span>I</span></a>
-    <a class="nav-drawer-link" href="#recognition" onclick="closeDrawer()">Awards & Recognition <span>J</span></a>
-    <a class="nav-drawer-cta" href="#contact" onclick="closeDrawer()">✨ Partner With Us</a>
+    <a class="nav-drawer-link" href="#brand">Brand Overview <span>A</span></a>
+    <a class="nav-drawer-link" href="#product">Product Info <span>B</span></a>
+    <a class="nav-drawer-link" href="#compliance">Compliance <span>C</span></a>
+    <a class="nav-drawer-link" href="#pricing">Pricing <span>D</span></a>
+    <a class="nav-drawer-link" href="#assets">Marketing Assets <span>E</span></a>
+    <a class="nav-drawer-link" href="#guidelines">Content Guidelines <span>F</span></a>
+    <a class="nav-drawer-link" href="#logistics">Logistics <span>G</span></a>
+    <a class="nav-drawer-link" href="#partnership">Partnership Terms <span>H</span></a>
+    <a class="nav-drawer-link" href="#opportunity">Business Opportunity <span>I</span></a>
+    <a class="nav-drawer-link" href="#recognition">Awards & Recognition <span>J</span></a>
+    <a class="nav-drawer-cta" href="#contact">✨ Partner With Us</a>
   </div>
 
   <!-- HERO -->
@@ -833,22 +833,47 @@
     const hamBtn = document.getElementById('hamBtn');
     const navDrawer = document.getElementById('navDrawer');
 
-    function openDrawer() { hamBtn.classList.add('open'); navDrawer.classList.add('open'); document.body.style.overflow = 'hidden'; }
-    function closeDrawer() { hamBtn.classList.remove('open'); navDrawer.classList.remove('open'); document.body.style.overflow = ''; }
+    function openDrawer() {
+      hamBtn.classList.add('open');
+      navDrawer.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+      hamBtn.classList.remove('open');
+      navDrawer.classList.remove('open');
+      document.body.style.overflow = '';
+    }
 
     hamBtn.addEventListener('click', () => {
       navDrawer.classList.contains('open') ? closeDrawer() : openDrawer();
     });
+
+    document.querySelectorAll('.nav-drawer-link, .nav-drawer-cta').forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const href = this.getAttribute('href');
+        closeDrawer();
+        setTimeout(() => {
+          const target = document.querySelector(href);
+          if (target) target.scrollIntoView({ behavior: 'smooth' });
+        }, 50);
+      });
+    });
+
     document.addEventListener('click', e => {
       if (navDrawer.classList.contains('open') && !mainNav.contains(e.target) && !navDrawer.contains(e.target)) closeDrawer();
     });
 
     // Scroll reveal
     const io = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
     }, { threshold: .07 });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   </script>
 </body>
+
 
 </html>

@@ -858,13 +858,16 @@
 
     document.querySelectorAll('.nav-drawer-link, .nav-drawer-cta').forEach(link => {
       link.addEventListener('click', function (e) {
-        e.preventDefault();
         const href = this.getAttribute('href');
+        const isExternal = href.startsWith('http');
         closeDrawer();
-        setTimeout(() => {
-          const target = document.querySelector(href);
-          if (target) target.scrollIntoView({ behavior: 'smooth' });
-        }, 50);
+       if (!isExternal) {
+          e.preventDefault();
+          setTimeout(() => {
+            const target = document.querySelector(href);
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
+          }, 50);
+        }
       });
     });
 
@@ -893,6 +896,7 @@
 
 
 </html>
+
 
 
 

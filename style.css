@@ -251,6 +251,10 @@ nav.scrolled {
   box-shadow: var(--shadow);
 }
 
+.nav-drawer-cta + .nav-drawer-cta {
+  margin-top: .6rem;
+}
+
 body {
   padding-top: 62px;
 }
@@ -1687,3 +1691,4 @@ footer strong {
   }
 
 }
+

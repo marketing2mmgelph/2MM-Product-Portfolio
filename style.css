@@ -1481,6 +1481,36 @@ footer strong {
   transform: none;
 }
 
+#backToTop {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 400;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--sky);
+  color: var(--white);
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(14, 194, 225, .35);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .3s, transform .3s, background .2s;
+  pointer-events: none;
+}
+
+#backToTop.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+#backToTop:hover {
+  background: var(--sky-2);
+}
+
 .d1 {
   transition-delay: .08s
 }
@@ -1655,4 +1685,5 @@ footer strong {
   .steps {
     grid-template-columns: 1fr;
   }
+
 }
